@@ -20,8 +20,28 @@ model Users {
   bio        String?
   avatarUrl  String?
 
+  posts      Posts[]
+  comments Comments[]
+
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
   @@map("users")
+}
+
+model Posts {
+  id    String    @id @default(uuid())
+
+  imageUrl    String
+  description   String?
+
+  authorId String
+  author Users @relation(fields: [authorId], references: [id])
+
+  comments    Comments[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("posts")
 }
