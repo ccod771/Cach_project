@@ -1,0 +1,16 @@
+model Comments {
+  id    String    @id @default(uuid())
+
+  content   String
+
+  authorId    String 
+  author    Users   @relation(fields: [authorId], references: [id])
+
+  postId    String 
+
+  post    Posts   @relation(fields: [postId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@map("comments)
+}
